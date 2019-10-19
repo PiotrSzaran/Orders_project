@@ -1,5 +1,7 @@
 package pl.szaran.repository;
 
+import pl.szaran.model.Error;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.Optional;

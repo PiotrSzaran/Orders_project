@@ -1,5 +1,8 @@
 package pl.szaran;
 
+import pl.szaran.dto.CountryDTO;
+import pl.szaran.service.CountryService;
+
 /**
  * Hello world!
  *
@@ -7,7 +10,11 @@ package pl.szaran;
 public class App 
 {
     public static void main( String[] args )
+
+            //this is for testing :)
     {
-        System.out.println( "Hello World!" );
+        CountryService countryService = new CountryService();
+
+        countryService.addCountry(CountryDTO.builder().name("PANAMA").build());
     }
 }
