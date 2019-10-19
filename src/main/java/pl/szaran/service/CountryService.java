@@ -22,7 +22,11 @@ public class CountryService implements ModelMapper {
     public void addCountry(CountryDTO countryDTO) {
         CountryValidator countryValidator = new CountryValidator();
         //------WALIDACJA------
-        if (countryValidator.validateCountryData(countryDTO).isEmpty()) {
+        var validate = countryValidator.validateCountryData(countryDTO);
+        if (!validate.isEmpty()) {
+            validate.forEach((k, v) -> System.out.println(k + " " + v));
+            validate.forEach((k, v) -> errorService.addError(TABLE + v));
+        } else {
 
             Country country = null;
             if (countryDTO.getId() != null) {
@@ -38,18 +42,14 @@ public class CountryService implements ModelMapper {
                     errorService.addError(TABLE + message);
                     System.out.println(message);
                 }
-
             }
 
             if (country == null) {
                 errorService.addError(TABLE + "PROBLEMS WITH COUNTRY");
                 throw new MyException(ExceptionCode.SERVICE, "PROBLEMS WITH COUNTRY");
             }
-        } else {
-            countryValidator.validateCountryData(countryDTO).forEach((k, v) -> System.out.println(k + " " + v));
         }
     }
-
 
     public CountryDTO getCountry(Long id) {
 
