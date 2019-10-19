@@ -80,4 +80,8 @@ public class CategoryService implements ModelMapper {
             System.out.println(entry.getKey() + ". " + entry.getValue().getName());
         }
     }
+
+    public void deleteCategories() {
+        categoryRepository.deleteAll();
+    }
 }

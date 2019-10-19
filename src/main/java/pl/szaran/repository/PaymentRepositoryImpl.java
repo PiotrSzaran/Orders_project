@@ -20,7 +20,7 @@ public class PaymentRepositoryImpl extends AbstractGenericRepository<Payment> im
 
         try {
             if (name == null) {
-                throw new MyException(ExceptionCode.REPOSITORY, "CATEGORY FIND BY NAME - NAME IS NULL");
+                throw new MyException(ExceptionCode.REPOSITORY, "PAYMENT FIND BY NAME - NAME IS NULL");
             }
             entityManager = entityManagerFactory.createEntityManager();
             tx = entityManager.getTransaction();
@@ -70,5 +70,28 @@ public class PaymentRepositoryImpl extends AbstractGenericRepository<Payment> im
         }
 
         return paymentsFromDB;
+    }
+
+    @Override
+    public void deleteAll() {
+        EntityManager entityManager = null;
+        EntityTransaction tx = null;
+
+        try {
+            entityManager = entityManagerFactory.createEntityManager();
+            tx = entityManager.getTransaction();
+            tx.begin();
+            entityManager.createQuery("delete from Payment p").executeUpdate();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
     }
 }
