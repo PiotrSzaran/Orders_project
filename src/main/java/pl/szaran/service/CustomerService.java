@@ -53,7 +53,6 @@ public class CustomerService {
                             .orElseThrow(() -> new MyException(ExceptionCode.SERVICE, "CANNOT ADD NEW COUNTRY"));
                 }
 
-
                 if (customerRepository.isCustomerWithNameSurnameCountry(customerDTO.getName(), customerDTO.getSurname(), customerDTO.getAge(), customerDTO.getCountryDTO().getName())) {
                     String errorMessage = "CUSTOMER " + customerDTO.getName()
                             + " " + customerDTO.getSurname()
@@ -98,6 +97,7 @@ public class CustomerService {
         return customersMap;
     }
 
+    /* bez sensu :) to trzeba na spokojnie, uśiąść i pomyśleć
     public Map<Integer, Customer> showCustomers() {
         Map<Integer, Customer> map = getMapOfCustomers();
         for (Map.Entry<Integer, Customer> entry : map.entrySet()) {
@@ -106,6 +106,14 @@ public class CustomerService {
                     + entry.getValue().getAge() + ", " + entry.getValue().getCountry().getName());
         }
         return map;
+    }
+     */
+
+    public void showCustomers(){
+        Map<Integer, Customer> map = getMapOfCustomers();
+        for (Map.Entry<Integer, Customer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ". " + entry.getValue().getName());
+        }
     }
 
     public void deleteCustomer() {
