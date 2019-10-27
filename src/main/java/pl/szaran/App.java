@@ -1,20 +1,18 @@
 package pl.szaran;
 
-import pl.szaran.dto.CountryDTO;
-import pl.szaran.service.CountryService;
+import pl.szaran.service.*;
 
 /**
  * Hello world!
- *
  */
-public class App 
-{
-    public static void main( String[] args )
+public class App {
+    public static void main(String[] args) {
 
-            //this is for testing :)
-    {
-        CountryService countryService = new CountryService();
+        PaymentService paymentService = new PaymentService();
 
-        countryService.addCountry(CountryDTO.builder().name("PANAMA").build());
+        MenuService menuService = new MenuService(paymentService);
+
+        menuService.mainMenu();
+
     }
 }

@@ -51,5 +51,57 @@ public final class MenuService {
         System.out.println("99. POWRÓT DO GŁÓWNEGO MENU");
     }
 
+    public void mainMenu() {
 
+        //DODAWANIE PŁATNOSCI DO BAZY - info w PaymentService
+        paymentService.addPaymentsToDB();
+
+        Scanner sc = new Scanner(System.in);
+        boolean quit = false;
+        int option;
+        try {
+            do {
+                showMenu();
+                System.out.println("Wybierz opcję:");
+                option = sc.nextInt();
+
+                switch (option) {
+                    case 1:
+                        showAddSubMenu();
+                        break;
+                    case 2:
+                        showPrintSubMenu();
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+
+                        break;
+                    case 5:
+
+                        break;
+                    case 6:
+
+                        break;
+                    case 7:
+
+                        break;
+                    case 99:
+                        quit = true;
+                        break;
+                    default:
+                        System.out.println("\n NIEPOPRAWNY WYBÓR \n");
+                }
+            } while (!quit);
+            System.out.println("DO ZOBACZENIA!");
+        } catch (MyException e) {
+            e.printStackTrace();
+            System.err.println(e.getExceptionInfo());
+        } finally {
+            if (sc != null) {
+                sc.close();
+            }
+        }
+    }
 }
