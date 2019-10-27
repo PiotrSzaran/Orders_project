@@ -70,7 +70,7 @@ public class TradeService implements ModelMapper{
         return tradesMap;
     }
 
-    public void showTradesMap() {
+    public void showTrades() {
         Map<Integer, Trade> map = getMapOfTrades();
         System.out.println("W bazie znajdują się poniższe branże:");
         for (Map.Entry<Integer, Trade> entry : map.entrySet()) {
