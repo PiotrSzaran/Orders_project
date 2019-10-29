@@ -83,15 +83,12 @@ public final class MenuService {
         //DODAWANIE PŁATNOSCI DO BAZY - info w PaymentService
         paymentService.addPaymentsToDB();
 
-        Scanner sc = new Scanner(System.in);
         boolean quit = false;
         int option;
         try {
             do {
                 showMenu();
-                System.out.println("Wybierz opcję:");
-
-                option = sc.nextInt();
+                option = UserDataService.getInt("Wybierz opcję:");
 
                 switch (option) {
                     case 1:
@@ -127,23 +124,18 @@ public final class MenuService {
         } catch (MyException e) {
             e.printStackTrace();
             System.err.println(e.getExceptionInfo());
-        } finally {
-            if (sc != null) {
-                sc.close();
-            }
         }
     }
 
     public void printSubMenu() {
 
-        Scanner sc = new Scanner(System.in);
         boolean quit = false;
         int option;
         try {
             do {
                 showPrintSubMenu();
-                System.out.println("Wybierz opcję:");
-                option = sc.nextInt();
+
+                option = UserDataService.getInt("Wybierz opcję:");
 
                 switch (option) {
                     case 1:
@@ -195,11 +187,6 @@ public final class MenuService {
         } catch (MyException e) {
             e.printStackTrace();
             System.err.println(e.getExceptionInfo());
-        }/* To zamykało zasób scannera przy powrocie do głównego menu, wywalając java.util.nosuchelementexception w metodzie mainMenu():
-        finally {
-            if (sc != null) {
-                sc.close();
-            }
-        }*/
+        }
     }
 }

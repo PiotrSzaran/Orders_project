@@ -15,4 +15,12 @@ public class ExceptionInfo {
         this.exceptionMessage = exceptionMessage;
         this.exceptionDateTime = LocalDateTime.now();
     }
+
+    @Override
+    public String toString() {
+        return "ExceptionInfo: \n" +
+                "\t Code: " + exceptionCode + '\n' +
+                "\t Message: " + exceptionMessage + '\n' +
+                "\t Time: " + exceptionDateTime;
+    }
 }
