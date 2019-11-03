@@ -1,5 +1,6 @@
 package pl.szaran.service;
 
+import pl.szaran.dto.CategoryDTO;
 import pl.szaran.exceptions.MyException;
 
 import java.util.Scanner;
@@ -92,7 +93,7 @@ public final class MenuService {
 
                 switch (option) {
                     case 1:
-                        showAddSubMenu();
+                        addSubMenu();
                         break;
                     case 2:
                         printSubMenu();
@@ -189,4 +190,93 @@ public final class MenuService {
             System.err.println(e.getExceptionInfo());
         }
     }
+
+    public void addSubMenu() {
+        boolean quit = false;
+        int option;
+        try {
+            do {
+                showAddSubMenu();
+
+                option = UserDataService.getInt("Wybierz opcję:");
+
+                switch (option) {
+                    case 1:
+                        insertCategory();
+                        break;
+                    case 2:
+                        insertCountry();
+                        break;
+                    case 3:
+                        insertCustomer();
+                        break;
+                    case 4:
+                        insertOrder();
+                        break;
+                    case 5:
+                        insertProducer();
+                        break;
+                    case 6:
+                        insertProduct();
+                        break;
+                    case 7:
+                        insertShop();
+                        break;
+                    case 8:
+                        insertProductToStock();
+                        break;
+                    case 9:
+                        insertTrade();
+                        break;
+                    case 99:
+                        quit = true;
+                        break;
+                    default:
+                        System.out.println("NIEPOPRAWNY WYBÓR");
+                }
+            } while (!quit);
+        } catch (MyException e) {
+            e.printStackTrace();
+            System.err.println(e.getExceptionInfo());
+        }
+    }
+
+    /**
+     * Poniżej umieszczam metody dodające poszczególne obiekty (kategorie, kraje,  klientów, produkty, producentów, itd.) do DB
+     */
+
+    private void insertCategory() {
+        String categoryName = UserDataService.getString("Podaj nazwę kategorii", "[A-Z]+");
+
+        CategoryDTO categoryDTO = CategoryDTO.builder()
+                .name(categoryName)
+                .build();
+
+        categoryService.addCategory(categoryDTO);
+    }
+
+    private void insertCountry() {
+    }
+
+    private void insertCustomer() {
+    }
+
+    private void insertOrder() {
+    }
+
+    private void insertProducer() {
+    }
+
+    private void insertProduct() {
+    }
+
+    private void insertShop() {
+    }
+
+    private void insertTrade() {
+    }
+
+    private void insertProductToStock() {
+    }
+
 }
