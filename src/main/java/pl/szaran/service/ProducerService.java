@@ -134,7 +134,9 @@ public class ProducerService implements ModelMapper {
     public void showProducers() {
         Map<Integer, Producer> map = getMapOfProducers();
         for (Map.Entry<Integer, Producer> entry : map.entrySet()) {
-            System.out.println(entry.getKey() + ". " + entry.getValue().getName());
+            System.out.println(entry.getKey() + ". " + entry.getValue().getName()
+                    + ", kraj: " + entry.getValue().getCountry().getName()
+                    + ", branża: " + entry.getValue().getTrade().getName());
         }
     }
 
