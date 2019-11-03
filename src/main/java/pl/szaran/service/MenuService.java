@@ -1,6 +1,7 @@
 package pl.szaran.service;
 
 import pl.szaran.dto.CategoryDTO;
+import pl.szaran.dto.CountryDTO;
 import pl.szaran.exceptions.MyException;
 
 import java.util.Scanner;
@@ -256,6 +257,13 @@ public final class MenuService {
     }
 
     private void insertCountry() {
+        String countryName = UserDataService.getString("Podaj nazwę kraju", "[A-Z]+");
+
+        CountryDTO countryDTO = CountryDTO.builder()
+                .name(countryName)
+                .build();
+
+        countryService.addCountry(countryDTO);
     }
 
     private void insertCustomer() {
