@@ -2,6 +2,7 @@ package pl.szaran.service;
 
 import pl.szaran.dto.CategoryDTO;
 import pl.szaran.dto.CountryDTO;
+import pl.szaran.dto.CustomerDTO;
 import pl.szaran.exceptions.MyException;
 
 import java.util.Scanner;
@@ -267,6 +268,21 @@ public final class MenuService {
     }
 
     private void insertCustomer() {
+        String customerName = UserDataService.getString("Podaj imię klienta", "[A-Z]+");
+        String customerSurname = UserDataService.getString("Podaj nazwisko klienta", "[A-Z]+");
+        String customerCountryName = UserDataService.getString("Podaj kraj klienta", "[A-Z]+");
+        int customerAge = UserDataService.getInt("Podaj wiek klienta");
+
+        CustomerDTO customerDTO = CustomerDTO.builder()
+                .name(customerName)
+                .surname(customerSurname)
+                .age(customerAge)
+                .countryDTO(CountryDTO.builder()
+                        .name(customerCountryName)
+                        .build())
+                .build();
+
+        customerService.addCustomer(customerDTO);
     }
 
     private void insertOrder() {
