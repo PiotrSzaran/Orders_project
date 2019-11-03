@@ -308,6 +308,17 @@ public final class MenuService {
     }
 
     private void insertShop() {
+        String shopName = UserDataService.getString("Podaj nazwę sklepu", "[A-Z]+");
+        String shopCountryName = UserDataService.getString("Podaj kraj sklepu", "[A-Z]+");
+
+        ShopDTO shopDTO = ShopDTO.builder()
+                .name(shopName)
+                .countryDTO(CountryDTO.builder()
+                        .name(shopCountryName)
+                        .build())
+                .build();
+
+        shopService.addShop(shopDTO);
     }
 
     private void insertTrade() {
