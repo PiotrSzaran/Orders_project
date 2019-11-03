@@ -112,7 +112,8 @@ public class CustomerService {
     public void showCustomers(){
         Map<Integer, Customer> map = getMapOfCustomers();
         for (Map.Entry<Integer, Customer> entry : map.entrySet()) {
-            System.out.println(entry.getKey() + ". " + entry.getValue().getName());
+            System.out.println(entry.getKey() + ". " + entry.getValue().getName() + " " + entry.getValue().getSurname()
+                    + ", wiek: " + entry.getValue().getAge() + ", kraj: " + entry.getValue().getCountry().getName());
         }
     }
 
