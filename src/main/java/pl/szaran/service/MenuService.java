@@ -1,8 +1,6 @@
 package pl.szaran.service;
 
-import pl.szaran.dto.CategoryDTO;
-import pl.szaran.dto.CountryDTO;
-import pl.szaran.dto.CustomerDTO;
+import pl.szaran.dto.*;
 import pl.szaran.exceptions.MyException;
 
 import java.util.Scanner;
@@ -289,6 +287,21 @@ public final class MenuService {
     }
 
     private void insertProducer() {
+        String producerName = UserDataService.getString("Podaj nazwę producenta", "[A-Z]+");
+        String producerCountryName = UserDataService.getString("Podaj kraj producenta", "[A-Z]+");
+        String producerTradeName = UserDataService.getString("Podaj branżę producenta", "[A-Z]+");
+
+        ProducerDTO producerDTO = ProducerDTO.builder()
+                .name(producerName)
+                .countryDTO(CountryDTO.builder()
+                        .name(producerCountryName)
+                        .build())
+                .tradeDTO(TradeDTO.builder()
+                        .name(producerTradeName)
+                        .build())
+                .build();
+
+        producerService.addProducer(producerDTO);
     }
 
     private void insertProduct() {
