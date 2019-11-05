@@ -2,8 +2,7 @@ package pl.szaran.service;
 
 import pl.szaran.dto.*;
 import pl.szaran.exceptions.MyException;
-
-import java.util.Scanner;
+import java.math.BigDecimal;
 
 public final class MenuService {
 
@@ -305,6 +304,34 @@ public final class MenuService {
     }
 
     private void insertProduct() {
+        String productName = UserDataService.getString("Podaj nazwę produktu", "[A-Z ]+");
+        String productCategoryName = UserDataService.getString("Podaj nazwę kategorii produktu", "[A-Z ]+");
+        String productProducerName = UserDataService.getString("Podaj nazwę producenta", "[A-Z ]+");
+        String productProducerCountryName = UserDataService.getString("Podaj nazwę kraju producenta", "[A-Z ]+");
+        String productProducerTradeName = UserDataService.getString("Podaj nazwę branży producenta", "[A-Z ]+");
+        BigDecimal productPrice = UserDataService.getBigDecimal("Podaj cenę produktu");
+
+        var guaranteeSet = guaranteeService.setProductGuarantees(); //wybór usług gwarancyjnych
+
+        ProductDTO productDTO = ProductDTO.builder()
+                .name(productName)
+                .categoryDTO(CategoryDTO.builder()
+                        .name(productCategoryName)
+                        .build())
+                .producerDTO(ProducerDTO.builder()
+                        .name(productProducerName)
+                        .countryDTO(CountryDTO.builder()
+                                .name(productProducerCountryName)
+                                .build())
+                        .tradeDTO(TradeDTO.builder()
+                                .name(productProducerTradeName)
+                                .build())
+                        .build())
+                .price(productPrice)
+                .guarantees(guaranteeSet)
+                .build();
+
+        productService.addProduct(productDTO);
     }
 
     private void insertShop() {
