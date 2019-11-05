@@ -322,6 +322,13 @@ public final class MenuService {
     }
 
     private void insertTrade() {
+        String tradeName = UserDataService.getString("Podaj nazwę branży", "[A-Z]+");
+
+        TradeDTO tradeDTO = TradeDTO.builder()
+                .name(tradeName)
+                .build();
+
+        tradeService.addTrade(tradeDTO);
     }
 
     private void insertProductToStock() {
