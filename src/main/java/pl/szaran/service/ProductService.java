@@ -5,7 +5,6 @@ import pl.szaran.exceptions.ExceptionCode;
 import pl.szaran.exceptions.MyException;
 import pl.szaran.model.*;
 import pl.szaran.repository.*;
-import pl.szaran.validators.CategoryValidator;
 import pl.szaran.validators.ProductValidator;
 
 import java.util.*;
@@ -98,6 +97,12 @@ public class ProductService implements ModelMapper {
                         producer = ModelMapper.fromProducerDTOToProducer(productDTO.getProducerDTO());
                         producer.setCountry(country);
                         producer.setTrade(trade);
+                        producer = producerRepository.saveOrUpdate(Producer.builder()
+                                .name(productDTO.getProducerDTO().getName())
+                                .country(country)
+                                .trade(trade)
+                                .build())
+                                .orElseThrow(() -> new MyException(ExceptionCode.SERVICE, "CANNOT ADD PRODUCER"));
                     }
                 }
 
