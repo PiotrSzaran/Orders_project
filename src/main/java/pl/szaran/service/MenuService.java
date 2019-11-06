@@ -359,6 +359,47 @@ public final class MenuService {
     }
 
     private void insertProductToStock() {
+        String productName = UserDataService.getString("Podaj nazwę produktu", "[A-Z ]+");
+        BigDecimal productPrice = UserDataService.getBigDecimal("Podaj cenę produktu");
+        String categoryName = UserDataService.getString("Podaj nazwę kategorii produktu", "[A-Z ]+");
+        String producerName = UserDataService.getString("Podaj nazwę producenta", "[A-Z ]+");
+        String producerCountryName = UserDataService.getString("Podaj nazwę kraju producenta", "[A-Z ]+");
+        String producerTradeName = UserDataService.getString("Podaj nazwę branży", "[A-Z ]+");
+        String shopName = UserDataService.getString("Podaj nazwę sklepu", "[A-Z ]+");
+        String shopCountryName = UserDataService.getString("Podaj nazwę kraju sklepu", "[A-Z ]+");
+        int quantity = UserDataService.getInt("Podaj ilość produktu w magazynie");
+
+        var guaranteeSet = guaranteeService.setProductGuarantees(); //wybór usług gwarancyjnych
+
+        StockDTO stockDTO = StockDTO.builder()
+                .quantity(quantity)
+                .productDTO(ProductDTO.builder()
+                        .name(productName)
+                        .price(productPrice)
+                        .guarantees(guaranteeSet)
+                        .categoryDTO(CategoryDTO.builder()
+                                .name(categoryName)
+                                .build())
+                        .producerDTO(ProducerDTO.builder()
+                                .name(producerName)
+                                .countryDTO(CountryDTO.builder()
+                                        .name(producerCountryName)
+                                        .build())
+                                .tradeDTO(TradeDTO.builder()
+                                        .name(producerTradeName)
+                                        .build())
+                                .build())
+                        .build())
+                .shopDTO(ShopDTO.builder()
+                        .name(shopName)
+                        .countryDTO(CountryDTO.builder()
+                                .name(shopCountryName)
+                                .build())
+                        .build())
+                .build();
+
+
+        stockService.addStock(stockDTO);
     }
 
 }
