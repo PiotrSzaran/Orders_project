@@ -96,9 +96,8 @@ public class CustomerService {
         }
         return customersMap;
     }
-
-    /* bez sensu :) to trzeba na spokojnie, uśiąść i pomyśleć
-    public Map<Integer, Customer> showCustomers() {
+    //todo a moeby tak zaimplementowa jakść metodę do zwracania dowolnej mapy i wyswietlania jej zawartosci? albo tylko jej wyswietlania? - do przemyslenia
+    public Map<Integer, Customer> showMapOfCustomers() {
         Map<Integer, Customer> map = getMapOfCustomers();
         for (Map.Entry<Integer, Customer> entry : map.entrySet()) {
             System.out.println(entry.getKey() + ". " + entry.getValue().getName() + " "
@@ -107,7 +106,6 @@ public class CustomerService {
         }
         return map;
     }
-     */
 
     public void showCustomers(){
         Map<Integer, Customer> map = getMapOfCustomers();
