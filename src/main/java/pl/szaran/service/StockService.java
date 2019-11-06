@@ -167,6 +167,7 @@ public class StockService implements ModelMapper {
                         product = productRepository.saveOrUpdate(Product.builder()
                                 .name(stockDTO.getProductDTO().getName())
                                 .price(stockDTO.getProductDTO().getPrice())
+                                .guaranteeComponents(stockDTO.getProductDTO().getGuarantees())
                                 .producer(producer)
                                 .category(category)
                                 .build())
