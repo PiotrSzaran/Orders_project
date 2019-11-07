@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ErrorService implements ModelMapper{
     final ErrorRepository errorRepository = new ErrorRepositoryImpl();
@@ -38,5 +39,14 @@ public class ErrorService implements ModelMapper{
         for (Map.Entry<Integer, Error> entry : map.entrySet()) {
             System.out.println(entry.getKey() + ". " + entry.getValue().getDate() + ", " + entry.getValue().getMessage());
         }
+    }
+
+    public List<ErrorDTO> getErrors() {
+        return errorRepository
+                .findAll()
+                .stream()
+                .map(ModelMapper::fromErrorToErrorDTO)
+                .map(errorDTO -> ErrorDTO.builder().date(errorDTO.getDate()).message(errorDTO.getMessage()).build())
+                .collect(Collectors.toList());
     }
 }
