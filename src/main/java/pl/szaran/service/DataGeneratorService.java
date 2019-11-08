@@ -129,4 +129,26 @@ public class DataGeneratorService {
         errorService.deleteErrors();
     }
 
+    public void generateData() {
+        final String categoriesJsonFilename = "categories.json";
+        saveCategoriesToDB(categoriesJsonFilename);
+        final String countriesJsonFilename = "countries.json";
+        saveCountriesToDB(categoriesJsonFilename);
+        final String customersJsonFilename = "customers.json";
+        saveCustomersToDB(customersJsonFilename);
+        final String errorsJsonFilename = "errors.json";
+        saveErrorsToDB(errorsJsonFilename);
+        final String ordersJsonFilename = "orders.json";
+        saveOrdersToDB(ordersJsonFilename);
+        final String producersJsonFilename = "producers.json";
+        saveProducersToDB(producersJsonFilename);
+        final String productsJsonFilename = "products.json";
+        saveProductsToDB(productsJsonFilename);
+        final String shopsJsonFilename = "shops.json";
+        saveShopsToDB(shopsJsonFilename);
+        final String stockJsonFilename = "stock.json";
+        saveStockToDB(stockJsonFilename);
+        final String tradesJsonFilename = "trades.json";
+        saveTradesToDB(tradesJsonFilename);
+    }
 }
