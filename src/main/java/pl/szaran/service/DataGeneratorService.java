@@ -57,7 +57,7 @@ public class DataGeneratorService {
                 .forEach(customerService::addCustomer);
     }
 
-    private void  saveErrorsToDB(final String jsonFilename) {
+    private void saveErrorsToDB(final String jsonFilename) {
         ErrorJsonConverter errorJsonConverter = new ErrorJsonConverter(jsonFilename);
         errorJsonConverter
                 .fromJson()
@@ -69,7 +69,7 @@ public class DataGeneratorService {
         OrderJsonConverter orderJsonConverter = new OrderJsonConverter(jsonFilename);
         orderJsonConverter
                 .fromJson()
-                .orElseThrow(()-> new MyException(ExceptionCode.SERVICE, "ORDER JSON CONVERTER - DATA GENERATOR"))
+                .orElseThrow(() -> new MyException(ExceptionCode.SERVICE, "ORDER JSON CONVERTER - DATA GENERATOR"))
                 //.forEach(System.out::println);
                 .forEach(orderService::addOrder);
     }
@@ -78,7 +78,7 @@ public class DataGeneratorService {
         ProducerJsonConverter producerJsonConverter = new ProducerJsonConverter(jsonFilename);
         producerJsonConverter
                 .fromJson()
-                .orElseThrow(()-> new MyException(ExceptionCode.SERVICE, "PRODUCER JSON CONVERTER - DATA GENERATOR"))
+                .orElseThrow(() -> new MyException(ExceptionCode.SERVICE, "PRODUCER JSON CONVERTER - DATA GENERATOR"))
                 .forEach(producerService::addProducer);
     }
 
@@ -86,7 +86,7 @@ public class DataGeneratorService {
         ProductJsonConverter productJsonConverter = new ProductJsonConverter(jsonFilename);
         productJsonConverter
                 .fromJson()
-                .orElseThrow(()-> new MyException(ExceptionCode.SERVICE, "PRODUCT JSON CONVERTER - DATA GENERATOR"))
+                .orElseThrow(() -> new MyException(ExceptionCode.SERVICE, "PRODUCT JSON CONVERTER - DATA GENERATOR"))
                 .forEach(productService::addProduct);
     }
 
@@ -94,7 +94,7 @@ public class DataGeneratorService {
         ShopJsonConverter shopJsonConverter = new ShopJsonConverter(jsonFilename);
         shopJsonConverter
                 .fromJson()
-                .orElseThrow(()-> new MyException(ExceptionCode.SERVICE, "SHOP JSON CONVERTER - DATA GENERATOR"))
+                .orElseThrow(() -> new MyException(ExceptionCode.SERVICE, "SHOP JSON CONVERTER - DATA GENERATOR"))
                 .forEach(shopService::addShop);
     }
 
@@ -102,7 +102,7 @@ public class DataGeneratorService {
         StockJsonConverter stockJsonConverter = new StockJsonConverter(jsonFilename);
         stockJsonConverter
                 .fromJson()
-                .orElseThrow(()-> new MyException(ExceptionCode.SERVICE, "STOCK JSON CONVERTER - DATA GENERATOR"))
+                .orElseThrow(() -> new MyException(ExceptionCode.SERVICE, "STOCK JSON CONVERTER - DATA GENERATOR"))
                 .forEach(stockService::addStock);
     }
 
@@ -110,10 +110,23 @@ public class DataGeneratorService {
         TradeJsonConverter tradeJsonConverter = new TradeJsonConverter(jsonFilename);
         tradeJsonConverter
                 .fromJson()
-                .orElseThrow(()-> new MyException(ExceptionCode.SERVICE, "TRADE JSON CONVERTER - DATA GENERATOR"))
+                .orElseThrow(() -> new MyException(ExceptionCode.SERVICE, "TRADE JSON CONVERTER - DATA GENERATOR"))
                 .forEach(tradeService::addTrade);
     }
 
-
+    public void deleteData() {
+        //ze wzgledu na klucze, dane muszą być usuwane w odpowiedniej kolejnosci
+        //todo dorobic czyszczenie tabeli guarantee_components
+        stockService.deleteStock();
+        orderService.deleteOrders();
+        productService.deleteProducts();
+        producerService.deleteProducers();
+        customerService.deleteCustomers();
+        shopService.deleteShops();
+        countryService.deleteCountries();
+        tradeService.deleteTrades();
+        categoryService.deleteCategories();
+        errorService.deleteErrors();
+    }
 
 }
