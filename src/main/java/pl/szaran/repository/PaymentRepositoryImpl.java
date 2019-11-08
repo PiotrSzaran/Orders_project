@@ -2,6 +2,7 @@ package pl.szaran.repository;
 
 import pl.szaran.exceptions.ExceptionCode;
 import pl.szaran.exceptions.MyException;
+import pl.szaran.model.EPayment;
 import pl.szaran.model.Payment;
 
 import javax.persistence.EntityManager;
@@ -28,7 +29,8 @@ public class PaymentRepositoryImpl extends AbstractGenericRepository<Payment> im
 
             List<Payment> elements = entityManager
                     .createQuery("select p from Payment p where p.payment = :name", Payment.class)
-                    .setParameter("name", name)
+                    //zmiana na EPayment.valueOf() - zeby dzialal import z json
+                    .setParameter("name", EPayment.valueOf(name))
                     .getResultList();
             item = elements.size() == 0 ? Optional.empty() : Optional.of(elements.get(0));
             tx.commit();
