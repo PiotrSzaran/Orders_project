@@ -44,6 +44,9 @@ public class OrderService implements ModelMapper {
                 if (orderDTO.getProductDTO().getId() != null) {
                     product = productRepository.findById(orderDTO.getProductDTO().getId()).orElse(null);
                 }
+                if (product == null && orderDTO.getProductDTO().getName() != null) {
+                    product = productRepository.findByName(orderDTO.getProductDTO().getName()).orElse(null);
+                }
                 if (product == null) {
                     Category category = null;
 
@@ -134,6 +137,9 @@ public class OrderService implements ModelMapper {
                 Customer customer = null;
                 if (orderDTO.getCustomerDTO().getId() != null) {
                     customer = customerRepository.findById(orderDTO.getCustomerDTO().getId()).orElse(null);
+                }
+                if (customer == null && orderDTO.getCustomerDTO().getName() != null) {
+                    customer = customerRepository.findByName(orderDTO.getCustomerDTO().getName()).orElse(null);
                 }
                 if (customer == null) {
                     Country country = null;
