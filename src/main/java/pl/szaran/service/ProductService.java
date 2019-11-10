@@ -140,6 +140,7 @@ public class ProductService implements ModelMapper {
                                 .tradeDTO(TradeDTO.builder()
                                         .name(productDTO.getProducerDTO().getTradeDTO().getName()).build())
                                 .build())
+                        .guarantees(productDTO.getGuarantees())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -159,9 +160,9 @@ public class ProductService implements ModelMapper {
         Map<Integer, Product> map = getMapOfProducts();
         for (Map.Entry<Integer, Product> entry : map.entrySet()) {
             System.out.println(entry.getKey() + ". " + entry.getValue().getName() + ", cena: "
-                            + entry.getValue().getPrice() + ", wyprodukowany przez: " + entry.getValue().getProducer().getName() + " "
-                            + entry.getValue().getProducer().getCountry().getName() + ", kategoria: " + entry.getValue().getCategory().getName()
-                    //+ ", pakiet gwarancyjny: " + entry.getValue().getGuaranteeComponents()
+                    + entry.getValue().getPrice() + ", wyprodukowany przez: " + entry.getValue().getProducer().getName() + " "
+                    + entry.getValue().getProducer().getCountry().getName() + ", kategoria: " + entry.getValue().getCategory().getName()
+                    + ", pakiet gwarancyjny: " + entry.getValue().getGuaranteeComponents()
             );
         }
     }
@@ -172,18 +173,16 @@ public class ProductService implements ModelMapper {
 
     public Map<Integer, Product> showProductsByCategory() {
         final CategoryService categoryService = new CategoryService();
-        Scanner sc = new Scanner(System.in);
         categoryService.showCategories();
-        System.out.println("Wybierz kategorię produktu");
-        int i = sc.nextInt();
+        int i = UserDataService.getInt("Wybierz kategorię produktu");
         Map<Integer, Category> mapOfCategories = categoryService.getMapOfCategories();
         Map<Integer, Product> map = getMapOfProductsWithCategory(mapOfCategories.get(i).getName());
 
         for (Map.Entry<Integer, Product> entry : map.entrySet()) {
             System.out.println(entry.getKey() + ". " + entry.getValue().getName() + ", cena: "
-                            + entry.getValue().getPrice() + ", wyprodukowany przez: " + entry.getValue().getProducer().getName() + " "
-                            + entry.getValue().getProducer().getCountry().getName()
-                    //+ ", pakiet gwarancyjny: " + entry.getValue().getGuaranteeComponents()
+                    + entry.getValue().getPrice() + ", wyprodukowany przez: " + entry.getValue().getProducer().getName() + " "
+                    + entry.getValue().getProducer().getCountry().getName()
+                    + ", pakiet gwarancyjny: " + entry.getValue().getGuaranteeComponents()
             );
         }
 
@@ -225,13 +224,9 @@ public class ProductService implements ModelMapper {
     }
 
     public void showProductsByClientData() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Podaj imię klienta:");
-        String name = sc.nextLine();
-        System.out.println("Podaj nazwisko klienta:");
-        String surname = sc.nextLine();
-        System.out.println("Podaj kraj pochodzenia produktu");
-        String countryName = sc.nextLine();
+        String name = UserDataService.getString("Podaj imię klienta:", "[A-Z]+");
+        String surname = UserDataService.getString("Podaj nazwisko klienta:", "[A-Z]+");
+        String countryName = UserDataService.getString("Podaj kraj pochodzenia produktu", "[A-Z]+");
 
         if (name.equals(null) || name.isEmpty() || surname.isEmpty() || surname.equals(null) || countryName.isEmpty() || countryName.equals(null)) {
             throw new MyException(ExceptionCode.SERVICE, "METHOD showProductsNyClientData: NAME: " + name + ", SURNAME: "
