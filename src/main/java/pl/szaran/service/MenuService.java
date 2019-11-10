@@ -26,6 +26,8 @@ public final class MenuService {
     private final ShopService shopService;
     private final StockService stockService;
     private final TradeService tradeService;
+    private final DataExportService dataExportService;
+    private final DataGeneratorService dataGeneratorService;
 
     public MenuService(CategoryService categoryService, CountryService countryService, CustomerService customerService,
                        ErrorService errorService, GuaranteeService guaranteeService, OrderService orderService,
@@ -43,6 +45,12 @@ public final class MenuService {
         this.shopService = shopService;
         this.stockService = stockService;
         this.tradeService = tradeService;
+
+        dataExportService = new DataExportService(categoryService, countryService, customerService, errorService,
+                orderService, producerService, productService, shopService, stockService, tradeService);
+
+        dataGeneratorService = new DataGeneratorService(categoryService, countryService, customerService, errorService,
+                orderService, producerService, productService, shopService, stockService, tradeService);
     }
 
     private void showMenu() {
@@ -106,13 +114,13 @@ public final class MenuService {
                         printSubMenu();
                         break;
                     case 3:
-
+                        dataGeneratorService.generateData();
                         break;
                     case 4:
-
+                        dataExportService.exportData();
                         break;
                     case 5:
-
+                        dataGeneratorService.deleteData();
                         break;
                     case 6:
 
