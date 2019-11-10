@@ -166,6 +166,7 @@ public interface ModelMapper {
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
+                .guarantees(product.getGuaranteeComponents())
                 .categoryDTO(product.getCategory() == null ? null : fromCategoryToCategoryDTO(product.getCategory()))
                 .producerDTO(product.getProducer() == null ? null : fromProducerToProducerDTO(product.getProducer()))
 
