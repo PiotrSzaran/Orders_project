@@ -81,10 +81,15 @@ public class ProductRepositoryImpl extends AbstractGenericRepository<Product> im
         EntityManager entityManager = null;
         EntityTransaction tx = null;
         try {
+            var productsList = findAll();
             entityManager = entityManagerFactory.createEntityManager();
             tx = entityManager.getTransaction();
             tx.begin();
-            entityManager.createQuery("delete from Product p").executeUpdate();
+            for (Product p: productsList){
+                entityManager.remove(entityManager.contains(p) ? p : entityManager.merge(p));
+            }
+
+            //entityManager.createQuery("delete from Product p").executeUpdate();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
