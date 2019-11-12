@@ -58,7 +58,7 @@ public class ProductRepositoryImpl extends AbstractGenericRepository<Product> im
             entityManager = entityManagerFactory.createEntityManager();
             tx = entityManager.getTransaction();
             tx.begin();
-            productsFromDB = entityManager.createQuery("select p from Product p join fetch p.guaranteeComponents", Product.class).getResultList();
+            productsFromDB = entityManager.createQuery("select distinct p from Product p inner join fetch p.guaranteeComponents", Product.class).getResultList();
 
             tx.commit();
         } catch (Exception e) {
@@ -137,7 +137,7 @@ public class ProductRepositoryImpl extends AbstractGenericRepository<Product> im
             entityManager = entityManagerFactory.createEntityManager();
             tx = entityManager.getTransaction();
             tx.begin();
-            productsFromDB = entityManager.createQuery("select c from Product c join fetch c.guaranteeComponents where c.category.name = :name", Product.class)
+            productsFromDB = entityManager.createQuery("select distinct c from Product c inner join fetch c.guaranteeComponents where c.category.name = :name", Product.class)
                     .setParameter("name", name)
                     .getResultList();
 
