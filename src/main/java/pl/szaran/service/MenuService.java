@@ -138,7 +138,7 @@ public final class MenuService {
                         dataGeneratorService.deleteData();
                         break;
                     case 6:
-
+                        printStatisticsSubmenu();
                         break;
                     case 7:
                         htmlExportService.exportData();
@@ -265,6 +265,49 @@ public final class MenuService {
                         System.out.println("NIEPOPRAWNY WYBÓR");
                 }
             } while (!quit);
+        } catch (MyException e) {
+            e.printStackTrace();
+            System.err.println(e.getExceptionInfo());
+        }
+    }
+
+    void printStatisticsSubmenu() {
+
+        int option;
+        try {
+            do {
+                showStatisticsSubMenu();
+                option = UserDataService.getInt("Wybierz opcję:");
+
+                switch (option) {
+                    case 1:
+                        productService.showProductsWithBiggestPriceCategory();
+                        break;
+                    case 2:
+                        productService.showProductsByCustomersOriginAndAge();
+                        break;
+                    case 3:
+                        shopService.showShopsProductsWithDifferentCountries();
+                        break;
+                    case 4:
+                        producerService.showProducersByTradeAndQuantity();
+                        break;
+                    case 5:
+                        orderService.showOrdersByTimeTotalPrice();
+                        break;
+                    case 6:
+                        productService.showProductsByClientData();
+                        break;
+                    case 7:
+                        customerService.showCustomersWithCommonCountryProducts();
+                        break;
+                    case 99:
+                        mainMenu();
+                        break;
+                    default:
+                        System.out.println("NIEPOPRAWNY WYBÓR");
+                }
+            } while (true);
         } catch (MyException e) {
             e.printStackTrace();
             System.err.println(e.getExceptionInfo());
