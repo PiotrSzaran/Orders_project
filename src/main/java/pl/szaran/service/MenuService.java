@@ -98,6 +98,17 @@ public final class MenuService {
         System.out.println("99. POWRÓT DO GŁÓWNEGO MENU");
     }
 
+    private void showStatisticsSubMenu() {
+        System.out.println("1. Wyświetl produkty o największej cenie w każdej kategorii");
+        System.out.println("2. Wyświetl produkty według kraju i wieku klientów");
+        System.out.println("3. Wyświetl sklepy, według produktów, których kraj jest inny niż kraje, w których występują oddziały sklepu");
+        System.out.println("4. Wyświetl procentów według podanej branży, których całkowita liczba produktów > niż podana liczba");
+        System.out.println("5. Wyświetl zamówienia, według daty o kwocie zamówienia większej niż wartość podana przez użytkownika.");
+        System.out.println("6. Wyświetl produkty, według podanych danych. Produkty należy pogrupować ze względu na producenta");
+        System.out.println("7. Wyświetl klientów, którzy zamówili przynajmniej jeden produkt pochodzący z tego samego kraju co klient");
+        System.out.println("99. POWRÓT DO GŁÓWNEGO MENU");
+    }
+
     public void mainMenu() {
 
         //DODAWANIE PŁATNOSCI DO BAZY - info w PaymentService
