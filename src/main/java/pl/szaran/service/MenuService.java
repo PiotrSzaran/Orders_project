@@ -28,6 +28,7 @@ public final class MenuService {
     private final TradeService tradeService;
     private final DataExportService dataExportService;
     private final DataGeneratorService dataGeneratorService;
+    private final HtmlExportService htmlExportService;
 
     public MenuService(CategoryService categoryService, CountryService countryService, CustomerService customerService,
                        ErrorService errorService, GuaranteeService guaranteeService, OrderService orderService,
@@ -51,6 +52,9 @@ public final class MenuService {
 
         dataGeneratorService = new DataGeneratorService(categoryService, countryService, customerService, errorService,
                 orderService, producerService, productService, shopService, stockService, tradeService);
+
+        htmlExportService = new HtmlExportService(categoryService, countryService, customerService, orderService,
+                paymentService, producerService, productService, shopService, stockService, tradeService);
     }
 
     private void showMenu() {
@@ -126,7 +130,7 @@ public final class MenuService {
 
                         break;
                     case 7:
-
+                        htmlExportService.exportData();
                         break;
                     case 99:
                         quit = true;
