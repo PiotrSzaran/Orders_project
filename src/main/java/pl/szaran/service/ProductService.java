@@ -127,21 +127,6 @@ public class ProductService implements ModelMapper {
                 .findAll()
                 .stream()
                 .map(ModelMapper::fromProductToProductDTO)
-                .map(productDTO -> ProductDTO.builder()
-                        .name(productDTO.getName())
-                        .price(productDTO.getPrice())
-                        .categoryDTO(CategoryDTO.builder()
-                                .name(productDTO.getCategoryDTO().getName())
-                                .build())
-                        .producerDTO(ProducerDTO.builder()
-                                .name(productDTO.getProducerDTO().getName())
-                                .countryDTO(CountryDTO.builder()
-                                        .name(productDTO.getProducerDTO().getCountryDTO().getName()).build())
-                                .tradeDTO(TradeDTO.builder()
-                                        .name(productDTO.getProducerDTO().getTradeDTO().getName()).build())
-                                .build())
-                        .guarantees(productDTO.getGuarantees())
-                        .build())
                 .collect(Collectors.toList());
     }
 

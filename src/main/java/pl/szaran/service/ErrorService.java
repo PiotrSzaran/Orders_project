@@ -72,7 +72,6 @@ public class ErrorService implements ModelMapper {
                 .findAll()
                 .stream()
                 .map(ModelMapper::fromErrorToErrorDTO)
-                .map(errorDTO -> ErrorDTO.builder().date(errorDTO.getDate()).message(errorDTO.getMessage()).build())
                 .collect(Collectors.toList());
     }
 

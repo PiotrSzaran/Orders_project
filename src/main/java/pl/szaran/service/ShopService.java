@@ -73,9 +73,6 @@ public class ShopService implements ModelMapper{
                 shopRepository.findAll()
                         .stream()
                         .map(ModelMapper::fromShopToShopDTO)
-                        .map(shopDTO -> ShopDTO.builder().name(shopDTO.getName())
-                                .countryDTO(CountryDTO.builder().name(shopDTO.getCountryDTO().getName()).build())
-                                .build())
                         .collect(Collectors.toList());
     }
 

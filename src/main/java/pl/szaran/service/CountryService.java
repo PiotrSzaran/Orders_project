@@ -71,7 +71,6 @@ public class CountryService implements ModelMapper {
                 .findAll()
                 .stream()
                 .map(ModelMapper::fromCountryToCountryDTO)
-                .map(countryDTO -> CountryDTO.builder().name(countryDTO.getName()).build())
                 .collect(Collectors.toList());
     }
 

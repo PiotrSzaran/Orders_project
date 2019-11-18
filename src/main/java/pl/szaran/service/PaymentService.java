@@ -41,7 +41,6 @@ public class PaymentService implements ModelMapper {
                 .findAll()
                 .stream()
                 .map(ModelMapper::fromPaymentToPaymentDTO)
-                .map(paymentDTO -> PaymentDTO.builder().payment(paymentDTO.getPayment()).build())
                 .collect(Collectors.toList());
     }
 
@@ -50,7 +49,6 @@ public class PaymentService implements ModelMapper {
                 .findAll()
                 .stream()
                 .map(ModelMapper::fromPaymentToPaymentDTO)
-                .map(paymentDTO -> PaymentDTO.builder().payment(paymentDTO.getPayment()).build())
                 .map(p -> p.getPayment())
                 .collect(Collectors.toList());
     }

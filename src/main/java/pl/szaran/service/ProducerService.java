@@ -121,13 +121,6 @@ public class ProducerService implements ModelMapper {
                 .findAll()
                 .stream()
                 .map(ModelMapper::fromProducerToProducerDTO)
-                .map(producerDTO -> ProducerDTO.builder()
-                        .name(producerDTO.getName())
-                        .countryDTO(CountryDTO.builder()
-                                .name(producerDTO.getCountryDTO().getName()).build())
-                        .tradeDTO(TradeDTO.builder()
-                                .name(producerDTO.getTradeDTO().getName()).build())
-                        .build())
                 .collect(Collectors.toList());
     }
 

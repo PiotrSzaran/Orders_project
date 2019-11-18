@@ -76,13 +76,6 @@ public class CustomerService {
                 .findAll()
                 .stream()
                 .map(ModelMapper::fromCustomerToCustomerDTO)
-                .map(customerDTO -> CustomerDTO.builder()
-                        .name(customerDTO.getName())
-                        .surname(customerDTO.getSurname())
-                        .countryDTO(CountryDTO.builder()
-                                .name(customerDTO.getCountryDTO().getName())
-                                .build())
-                        .age(customerDTO.getAge()).build())
                 .collect(Collectors.toList());
     }
 

@@ -57,7 +57,6 @@ public class CategoryService implements ModelMapper {
                 .findAll()
                 .stream()
                 .map(ModelMapper::fromCategoryToCategoryDTO)
-                .map(categoryDTO -> CategoryDTO.builder().name(categoryDTO.getName()).build())
                 .collect(Collectors.toList());
     }
 

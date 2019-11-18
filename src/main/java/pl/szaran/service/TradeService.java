@@ -55,7 +55,6 @@ public class TradeService implements ModelMapper{
                 .findAll()
                 .stream()
                 .map(ModelMapper::fromTradeToTradeDTO)
-                .map(tradeDTO -> TradeDTO.builder().name(tradeDTO.getName()).build())
                 .collect(Collectors.toList());
     }
 
