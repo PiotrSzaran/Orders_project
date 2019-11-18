@@ -272,11 +272,12 @@ public final class MenuService {
     }
 
     void printStatisticsSubmenu() {
-
+        boolean quit = false;
         int option;
         try {
             do {
                 showStatisticsSubMenu();
+
                 option = UserDataService.getInt("Wybierz opcję:");
 
                 switch (option) {
@@ -302,12 +303,12 @@ public final class MenuService {
                         customerService.showCustomersWithCommonCountryProducts();
                         break;
                     case 99:
-                        mainMenu();
+                        quit = true;
                         break;
                     default:
                         System.out.println("NIEPOPRAWNY WYBÓR");
                 }
-            } while (true);
+            } while (!quit);
         } catch (MyException e) {
             e.printStackTrace();
             System.err.println(e.getExceptionInfo());
